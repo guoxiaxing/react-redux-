@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import {createStore} from 'redux';
 //counter为数据源
-import counter from './Reducer';
+import Reducer from './Reducer'
 import Counter from './Counter'
+import List from './List'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import './App.css';
 // 将数据源转换为数据点
@@ -14,12 +15,17 @@ import './App.css';
 //3.store.subscribe()用来重新渲染页面,相当于setState()
 //4.store.replaceReducer()更换数据源
 //渲染时要与ReactDOM.render绑定，故要将store传给index.js 
-let store = createStore(counter)
+// let store = createStore(counter)
+let store = createStore(Reducer);
+console.log(store.getState().counter)
 class App extends Component {
   render() {
     return (
       <MuiThemeProvider>
-        <Counter store={store}/>
+      	<div>
+	       <Counter store={store}/>
+	       <List value={store}/>
+	    </div>
       </MuiThemeProvider>
     );
   }
